@@ -109,7 +109,7 @@ const Navigation = () => {
 // ============================================
 const HeroSection = () => {
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center">
+    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
       {/* Background image with dark overlay */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -119,25 +119,37 @@ const HeroSection = () => {
       />
       <div className="absolute inset-0 bg-[#2a2a2a]/85" />
       
+      {/* RR Watermark - Very large, subtle background element */}
+      <div 
+        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
+        aria-hidden="true"
+      >
+        <span 
+          className="font-serif font-bold text-white tracking-tight"
+          style={{ 
+            fontSize: 'clamp(300px, 45vw, 600px)',
+            opacity: 0.04,
+            letterSpacing: '-0.05em'
+          }}
+        >
+          RR
+        </span>
+      </div>
+      
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-        {/* Logo */}
+        {/* Official Logo */}
         <div className="mb-8">
-          <div className="inline-flex items-center justify-center w-24 h-24 bg-[#c41e3a] shadow-lg">
-            <span className="font-serif font-bold text-4xl text-white tracking-tight">
-              RR
-            </span>
-          </div>
+          <img 
+            src="./logo.png" 
+            alt="Representações Rodrigues - Desde 1967" 
+            className="h-20 md:h-24 lg:h-28 w-auto mx-auto drop-shadow-lg brightness-0 invert"
+          />
         </div>
-
-        {/* Company name */}
-        <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight">
-          Representações Rodrigues
-        </h1>
 
         {/* Tagline */}
         <p className="text-lg md:text-xl text-[#d0d0d0] max-w-2xl mx-auto mb-8 leading-relaxed">
-          Construindo parcerias sólidas no mercado de autopeças desde 1982.
+          Construindo parcerias sólidas no mercado de autopeças desde 1967.
           <span className="block mt-2 text-[#a0a0a0]">
             Excelência em representação comercial em Mato Grosso e Mato Grosso do Sul.
           </span>
@@ -165,7 +177,7 @@ const HeroSection = () => {
         {/* Stats */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
           {[
-            { value: "40+", label: "Anos de Experiência" },
+            { value: "55+", label: "Anos de Experiência" },
             { value: "16", label: "Indústrias Parceiras" },
             { value: "2", label: "Estados Atendidos" },
             { value: "100%", label: "Compromisso" },
@@ -308,27 +320,27 @@ const EquipeSection = () => {
     {
       name: "Oswaldo Rodrigues",
       role: "Diretor",
-      initials: "OR",
+      photo: "./oswaldo.jpg",
     },
     {
       name: "Suely Rodrigues",
       role: "Consultor Comercial / MS",
-      initials: "SR",
+      photo: "./suely.jpg",
     },
     {
       name: "Matheus Rodrigues",
       role: "Supervisor de Vendas MS/MT",
-      initials: "MR",
+      photo: "./matheus.jpg",
     },
     {
       name: "Érika Oliveira",
       role: "Coord. Administrativo",
-      initials: "EO",
+      photo: "./erika.jpg",
     },
     {
       name: "Frank de Sá",
       role: "Promotor Vendas / MT",
-      initials: "FS",
+      photo: "./frank.jpg",
     },
   ];
 
@@ -352,10 +364,12 @@ const EquipeSection = () => {
             <div key={member.name} className="text-center">
               {/* Photo circle - simple border */}
               <div className="relative mx-auto mb-4">
-                <div className="w-28 h-28 mx-auto rounded-full bg-[#e8e8e8] border-2 border-[#d0d0d0] flex items-center justify-center hover:border-[#c41e3a] transition-colors">
-                  <span className="font-serif font-bold text-2xl text-[#6a6a6a]">
-                    {member.initials}
-                  </span>
+                <div className="w-28 h-28 mx-auto rounded-full border-2 border-[#d0d0d0] overflow-hidden hover:border-[#c41e3a] transition-colors">
+                  <img 
+                    src={member.photo} 
+                    alt={member.name}
+                    className="w-full h-full object-cover object-top"
+                  />
                 </div>
               </div>
 
