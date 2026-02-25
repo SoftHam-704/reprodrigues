@@ -313,42 +313,44 @@ const EmpresaSection = () => {
 };
 
 // ============================================
-// NOSSA EQUIPE (TEAM) SECTION - Clean grid
+// NOSSA EQUIPE (TEAM) SECTION - Hierarchical layout with full-body photos
 // ============================================
 const EquipeSection = () => {
+  const founder = {
+    name: "Oswaldo Rodrigues",
+    role: "Diretor / Fundador",
+    photo: "./oswaldo-full.jpg",
+    description: "Fundador e líder da Representações Rodrigues desde 1982, construindo parcerias sólidas no mercado de autopeças.",
+  };
+
   const teamMembers = [
-    {
-      name: "Oswaldo Rodrigues",
-      role: "Diretor",
-      photo: "./oswaldo.jpg",
-    },
     {
       name: "Suely Rodrigues",
       role: "Consultor Comercial / MS",
-      photo: "./suely.jpg",
+      photo: "./suely-full.jpg",
     },
     {
       name: "Matheus Rodrigues",
       role: "Supervisor de Vendas MS/MT",
-      photo: "./matheus.jpg",
+      photo: "./matheus-full.jpg",
     },
     {
       name: "Érika Oliveira",
       role: "Coord. Administrativo",
-      photo: "./erika.jpg",
+      photo: "./erika-full.jpg",
     },
     {
       name: "Frank de Sá",
       role: "Promotor Vendas / MT",
-      photo: "./frank.jpg",
+      photo: "./frank-full.jpg",
     },
   ];
 
   return (
-    <section id="equipe" className="py-20 bg-white">
+    <section id="equipe" className="py-20 bg-[#f5f5f5]">
       <div className="max-w-6xl mx-auto px-6">
         {/* Section header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-14">
           <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#2a2a2a] mb-3">
             Nossa Equipe
           </h2>
@@ -358,30 +360,68 @@ const EquipeSection = () => {
           <div className="w-16 h-0.5 bg-[#c41e3a] mx-auto mt-4" />
         </div>
 
-        {/* Team grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-          {teamMembers.map((member) => (
-            <div key={member.name} className="text-center">
-              {/* Photo circle - simple border */}
-              <div className="relative mx-auto mb-4">
-                <div className="w-28 h-28 mx-auto rounded-full border-2 border-[#d0d0d0] overflow-hidden hover:border-[#c41e3a] transition-colors">
+        {/* Hierarchical layout: Founder featured left, team on right */}
+        <div className="grid lg:grid-cols-5 gap-6 items-start">
+          {/* Founder - Featured large card (spans 2 columns on desktop) */}
+          <div className="lg:col-span-2">
+            <div className="bg-white shadow-md hover:shadow-lg transition-shadow h-full">
+              {/* Photo container - larger size for founder */}
+              <div className="relative overflow-hidden bg-gradient-to-b from-[#f8f8f8] to-[#eeeeee]">
+                <img 
+                  src={founder.photo} 
+                  alt={founder.name}
+                  className="w-full h-[420px] md:h-[480px] object-cover object-top"
+                />
+                {/* Subtle gradient overlay at bottom for text readability */}
+                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/30 to-transparent" />
+              </div>
+              
+              {/* Founder info */}
+              <div className="p-6 text-center">
+                <div className="inline-block px-3 py-1 bg-[#c41e3a] text-white text-xs font-semibold uppercase tracking-wider mb-3">
+                  Fundador
+                </div>
+                <h3 className="font-serif text-2xl font-bold text-[#2a2a2a] mb-1">
+                  {founder.name}
+                </h3>
+                <p className="text-[#6d4c41] font-medium mb-3">
+                  {founder.role}
+                </p>
+                <p className="text-sm text-[#6a6a6a] leading-relaxed">
+                  {founder.description}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Team members - 2x2 grid on the right (spans 3 columns) */}
+          <div className="lg:col-span-3 grid sm:grid-cols-2 gap-5">
+            {teamMembers.map((member) => (
+              <div 
+                key={member.name} 
+                className="bg-white shadow-sm hover:shadow-md transition-shadow"
+              >
+                {/* Photo container */}
+                <div className="relative overflow-hidden bg-gradient-to-b from-[#f8f8f8] to-[#eeeeee]">
                   <img 
                     src={member.photo} 
                     alt={member.name}
-                    className="w-full h-full object-cover object-top"
+                    className="w-full h-[280px] sm:h-[260px] object-cover object-top"
                   />
                 </div>
+                
+                {/* Member info */}
+                <div className="p-4 text-center">
+                  <h3 className="font-semibold text-[#2a2a2a] mb-1">
+                    {member.name}
+                  </h3>
+                  <p className="text-sm text-[#6d4c41]">
+                    {member.role}
+                  </p>
+                </div>
               </div>
-
-              {/* Info */}
-              <h3 className="font-semibold text-[#2a2a2a] mb-1">
-                {member.name}
-              </h3>
-              <p className="text-sm text-[#6d4c41]">
-                {member.role}
-              </p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
